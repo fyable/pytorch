@@ -168,6 +168,8 @@ class DotProductAttention(nn.Module):
         keys_low = self.trs(keys)
         scores_low = torch.bmm(queries_low, keys_low.transpose(1,2)) / math.sqrt(queries_low.shape[-1])
         
+        
+        
         if top is None:
             self.attention_weights = masked_softmax(scores_low, valid_lens)
             return torch.bmm(self.dropout(self.attention_weights), values)
